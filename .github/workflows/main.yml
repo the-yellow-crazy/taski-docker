@@ -11,21 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      image: postgres:13.10
-      env:
-        POSTGRES_USER: django_user
-        POSTGRES_PASSWORD: django_password
-        POSTGRES_DB: django_db
-      ports:
-        - 5432:5432
-      # Эта конструкция описывает проверку готовности сервиса postgres
-      # Если её не будет, то тесты могут запуститься раньше, чем сервер PostgreSQL
-      # В результате тесты опять решат, что базы нет, — и упадут
-      options:  |
-        --health-cmd pg_isready
-        --health-interval 10s
-        --health-timeout 5s
-        --health-retries 5
+      postgres:
+        image: postgres:13.10
+        env:
+          POSTGRES_USER: django_user
+          POSTGRES_PASSWORD: django_password
+          POSTGRES_DB: django_db
+        ports:
+          - 5432:5432
+        # Эта конструкция описывает проверку готовности сервиса postgres
+        # Если её не будет, то тесты могут запуститься раньше, чем сервер 
+        # PostgreSQL, в результате тесты опять решат, что базы нет, — и упадут
+        options:  |
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
     # Копируем код проекта
