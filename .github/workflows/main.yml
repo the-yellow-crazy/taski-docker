@@ -22,7 +22,7 @@ jobs:
         # Эта конструкция описывает проверку готовности сервиса postgres
         # Если её не будет, то тесты могут запуститься раньше, чем сервер 
         # PostgreSQL, в результате тесты опять решат, что базы нет, — и упадут
-        options:  |
+        options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
