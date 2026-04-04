@@ -11,6 +11,8 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 CSRF_TRUSTED_ORIGINS = ['http://158.160.229.179', 'https://taskfortask.zapto.org']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'django.contrib.admin',
